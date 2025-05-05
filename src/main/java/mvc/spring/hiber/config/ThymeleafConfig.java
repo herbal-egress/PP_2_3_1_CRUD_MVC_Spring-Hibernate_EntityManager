@@ -23,13 +23,12 @@ public class ThymeleafConfig implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(this.applicationContext);
-        templateResolver.setPrefix("/WEB-INF/views/"); // задали папку, где лежат наши представления
-        templateResolver.setSuffix(".html"); // расширение наших представлений
-        templateResolver.setCharacterEncoding("UTF-8"); // для отображения русского языка в браузере
+        templateResolver.setPrefix("/WEB-INF/views/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
     }
 
-    // конфигурация представлений
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();

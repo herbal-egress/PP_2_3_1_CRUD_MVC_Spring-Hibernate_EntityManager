@@ -20,10 +20,10 @@ import java.util.Properties;
 @EnableJpaRepositories("mvc.spring.hiber.dao")
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties")
-@ComponentScan("mvc.spring.hiber") // где все файлы и папки нашейго проекта
+@ComponentScan("mvc.spring.hiber")
 public class DataBaseConfig {
     @Autowired
-    private Environment env; // инжектим Environment из фреймворка
+    private Environment env;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManager() {
@@ -35,7 +35,6 @@ public class DataBaseConfig {
         return emf;
     }
 
-    // для управления транзакциями:
     @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
@@ -43,11 +42,10 @@ public class DataBaseConfig {
         return transactionManager;
     }
 
-    // получаю все конфигурации hibernate из отдельного файла:
     @Bean
     public Properties getHibernateProperties() {
         Properties properties = new Properties();
-               InputStream is = getClass().getClassLoader().getResourceAsStream("hibernate.properties");
+        InputStream is = getClass().getClassLoader().getResourceAsStream("hibernate.properties");
         try {
             properties.load(is);
             return properties;
@@ -56,7 +54,6 @@ public class DataBaseConfig {
         }
     }
 
-    // указываю параметры подключения к БД для hibernate:
     @Bean
     public DataSource datasource() {
         BasicDataSource ds = new BasicDataSource();
@@ -64,8 +61,6 @@ public class DataBaseConfig {
         ds.setDriverClassName(env.getRequiredProperty("db.driver"));
         ds.setUsername(env.getRequiredProperty("db.username"));
         ds.setPassword(env.getRequiredProperty("db.password"));
-        // Свойства для DBCP - настройка пула соединений с БД.
-        // Управляет соединениями с БД, исключая постоянные открытия/закрытия соединений:
         ds.setInitialSize(Integer.parseInt(env.getRequiredProperty("db.initialSize")));
         ds.setMinIdle(Integer.parseInt(env.getRequiredProperty("db.minIdle")));
         ds.setMaxIdle(Integer.parseInt(env.getRequiredProperty("db.maxIdle")));

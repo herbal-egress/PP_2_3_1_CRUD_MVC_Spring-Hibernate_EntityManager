@@ -14,7 +14,7 @@
     </tr>
     <tr th:each="user, state : ${alluserskey}"
         class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
-        <td th:utext="${state.count}">...</td> <!-- вместо ... thymeleaf подставит значение-->
+        <td th:utext="${user.getId()}">...</td>
         <td>
             <a th:href="@{/users/id?id={id}(id=${user.getId()})}"
                th:utext="${user.getName()}">...</a>

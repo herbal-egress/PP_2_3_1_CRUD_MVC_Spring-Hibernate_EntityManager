@@ -5,11 +5,9 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-
 @Table(name = "User")
 public class User {
     @Id
-    @Column(name = "id")
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private int id;
@@ -24,7 +22,6 @@ public class User {
     }
 
     public User(String name, int age, String email) {
-//        this.id = id; // не используем, т.к. генерируется через БД
         this.name = name;
         this.age = age;
         this.email = email;
