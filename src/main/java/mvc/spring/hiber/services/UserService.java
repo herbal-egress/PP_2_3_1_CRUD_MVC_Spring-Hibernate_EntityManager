@@ -1,4 +1,3 @@
-// UserService.java - добавляем транзакции на уровне сервиса
 package mvc.spring.hiber.services;
 
 import mvc.spring.hiber.dao.UserDAO;
