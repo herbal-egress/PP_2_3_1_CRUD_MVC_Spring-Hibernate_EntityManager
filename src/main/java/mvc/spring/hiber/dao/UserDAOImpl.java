@@ -2,7 +2,6 @@ package mvc.spring.hiber.dao;
 
 import mvc.spring.hiber.model.User;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,7 +9,6 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Component
-@Transactional(readOnly = true)
 public class UserDAOImpl implements UserDAO {
     @PersistenceContext
     private EntityManager entityManager;
@@ -28,13 +26,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    @Transactional
     public void save(User user) {
         entityManager.persist(user);
     }
 
     @Override
-    @Transactional
     public void update(int id, User updatedUser) {
         User userTeBeUpdated = entityManager.find(User.class, id);
         userTeBeUpdated.setName(updatedUser.getName());
@@ -44,7 +40,6 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    @Transactional
     public void delete(int id) {
         User userTeBeDeleted = entityManager.find(User.class, id);
         entityManager.remove(userTeBeDeleted);
